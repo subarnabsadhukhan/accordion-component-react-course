@@ -1,16 +1,21 @@
-import { useState } from "react";
-
-const AccordionItem = ({ num, title, text }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const AccordionItem = ({
+  activeIndex,
+  index,
+  onAccordionClick,
+  num,
+  title,
+  children,
+}) => {
+  const isOpen = index === activeIndex;
   return (
     <div
       className={`item ${isOpen ? "open" : ""}`}
-      onClick={() => setIsOpen((isOpen) => !isOpen)}
+      onClick={() => onAccordionClick(index)}
     >
       <p className="number">{num}</p>
       <p className="title">{title}</p>
       <p className="icon">{isOpen ? "-" : "+"}</p>
-      {isOpen && <div className="content-box">{text}</div>}
+      {isOpen && <div className="content-box">{children}</div>}
     </div>
   );
 };
